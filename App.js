@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Platform } from 'react-native';
+import Events from './screen/Events';
 import News from './screen/News';
 import Product from './screen/Product';
 
@@ -7,8 +8,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
-        <News />
+        {/* <News /> */}
         {/* <Product /> */}
+        <Events />
       </View>
     </SafeAreaView>
   );

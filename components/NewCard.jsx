@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, Text, Image } from 'react-native';
+import { FlatList, View, Text, Image, TouchableOpacity } from 'react-native';
 
 export default function NewsCard(props) {
   return (
@@ -9,9 +9,8 @@ export default function NewsCard(props) {
         return item.id.toString();
       }}
       renderItem={({ item }) => {
-        console.log(item.imageUrl);
         return (
-          <View
+          <TouchableOpacity
             style={{
               flexDirection: 'row',
               padding: 5,
@@ -35,13 +34,12 @@ export default function NewsCard(props) {
                 padding: 10,
               }}
             >
-              <Text style={{ fontSize: 25 }}>Title</Text>
+              <Text style={{ fontSize: 25 }}>{item.title.slice(0, 50)}...</Text>
               <Text style={{ fontSize: 16, textAlign: 'justify' }}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque
-                blanditiis aliquam quis enim hic assumenda aut, deserunt quasi
+                {item.body.slice(0, 100)}...
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         );
       }}
     />

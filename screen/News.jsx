@@ -1,58 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import NewsCard from '../components/NewCard';
 
 export default function News() {
-  const data = [
-    {
-      id: 1,
-      title: 'How to make Pasta',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-    {
-      id: 2,
-      title: 'How to make Pasta part two',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-    {
-      id: 3,
-      title: 'How to make Pasta part two',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-    {
-      id: 4,
-      title: 'How to make Pasta part two',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-    {
-      id: 5,
-      title: 'How to make Pasta part two',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-    {
-      id: 6,
-      title: 'How to make Pasta part two',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-    {
-      id: 7,
-      title: 'How to make Pasta part two',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem saepe quis natus incidunt nesciunt similique? Illum porro veritatis neque odio corporis nemo illo iusto. Voluptatum rem doloremque at perspiciatis neque!`,
-      imageUrl: '../assets/images/image.jpg',
-    },
-  ];
+  const [posts, setPosts] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError('an errro occures');
+        setLoading(true);
+      });
+  }, [loading]);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>News</Text>
       <View style={styles.main}>
         <View style={{ flex: 1 }}>
-          <NewsCard news={data} />
+          {loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <ActivityIndicator size="large" color="red" />
+            </View>
+          ) : (
+            <NewsCard news={posts.slice(0, 10)} />
+          )}
         </View>
       </View>
     </View>
