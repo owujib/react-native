@@ -23,7 +23,7 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaView style={styles.safeContainer}>
         <View style={styles.container}>
-          <Stack.Navigator initialRouteName={LOGIN_SCREEN}>
+          <Stack.Navigator initialRouteName={PRODUCT_SCREEN}>
             <Stack.Screen component={News} name={NEWS_SCREEN} />
             <Stack.Screen
               component={Product}
