@@ -11,7 +11,9 @@ import {
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-export default function Events() {
+import { NEWS_SCREEN } from '../constants';
+
+export default function Events(props) {
   const [name, setName] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -51,6 +53,12 @@ export default function Events() {
           setModalVisible(true);
         }}
       />
+      <Button
+        title="Go to news"
+        onPress={() => {
+          props.navigation.navigate(NEWS_SCREEN);
+        }}
+      />
 
       <Modal
         style={{ opacity: 0.7, justifyContent: 'flex-end' }}
@@ -72,6 +80,7 @@ export default function Events() {
               setModalVisible(false);
             }}
           />
+
           <Text>My modal</Text>
           <View style={{ flex: 0.9 }}>
             <WebView

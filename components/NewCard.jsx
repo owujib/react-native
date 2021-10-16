@@ -1,10 +1,12 @@
 import React from 'react';
 import { FlatList, View, Text, Image, TouchableOpacity } from 'react-native';
 
-export default function NewsCard(props) {
+import { PRODUCT_DETAILS_SCREEN } from '../constants';
+
+export default function NewsCard({ navigation, route, news }) {
   return (
     <FlatList
-      data={props.news}
+      data={news}
       keyExtractor={(item) => {
         return item.id.toString();
       }}
@@ -14,6 +16,11 @@ export default function NewsCard(props) {
             style={{
               flexDirection: 'row',
               padding: 5,
+            }}
+            onPress={() => {
+              navigation.push(PRODUCT_DETAILS_SCREEN, {
+                itemId: item.id,
+              });
             }}
           >
             {/* left */}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import NewsCard from '../components/NewCard';
 
-export default function News() {
+export default function News(props) {
   const [posts, setPosts] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,6 +19,8 @@ export default function News() {
         setLoading(true);
       });
   }, [loading]);
+
+  console.log(props);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>News</Text>
@@ -35,7 +37,11 @@ export default function News() {
               <ActivityIndicator size="large" color="red" />
             </View>
           ) : (
-            <NewsCard news={posts.slice(0, 10)} />
+            <NewsCard
+              news={posts.slice(0, 10)}
+              navigation={props.navigation}
+              route={props.route}
+            />
           )}
         </View>
       </View>
@@ -45,7 +51,7 @@ export default function News() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.9,
     alignItems: 'center',
   },
   text: {
