@@ -8,9 +8,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
-        {/* <News /> */}
+        <News />
         {/* <Product /> */}
-        <Events />
+        {/* <Events /> */}
       </View>
     </SafeAreaView>
   );
